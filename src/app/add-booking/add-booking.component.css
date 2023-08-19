@@ -1,0 +1,25 @@
+.stepper-container {
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.first-step-item {
+  margin-top: 0.5rem;
+}
+
+.stepper-btn {
+  margin-top: 0.5rem;
+}
+
+.back-btn {
+  margin-right: 0.5rem;
+}
+
+.start-now-checkbox {
+  margin-bottom: 0.5rem;
+}
+
+.bot-time-picker {
+  margin-top: -0.5rem
+}
+

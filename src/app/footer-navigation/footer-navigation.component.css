@@ -1,0 +1,60 @@
+.footer-toolbar {
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  border-radius: 5% 5% 0% 0%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.add-btn {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 0;
+  z-index: 1;
+  background-color: #ffc93c;
+  color: #121212;
+}
+
+.close-btn {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 0;
+  z-index: 1;
+  background-color: #FFAB91;
+  color: #121212;
+}
+
+.active-route {
+  color: #121212;
+}
+
+.nav-item-btn {
+  color: #616161;
+}
+
+.left-nav-item-btn {
+  margin-left: 10%;
+  text-align: center;
+}
+
+.right-nav-item-btn {
+  margin-right: 10%;
+  text-align: center;
+}
+
+.nav-item-btn-text {
+  font-size: small;
+  margin-top: -0.3rem;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 120px;
+}

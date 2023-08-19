@@ -1,0 +1,21 @@
+.logo {
+  margin-right: 0.2rem;
+}
+
+.header-toolbar {
+  background-color: #121212;
+  color: #fff;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-item-btn:hover {
+  background-color: #f8f9fa;
+  color: #121212;
+}
+
+.active-route {
+  text-decoration: underline;
+}

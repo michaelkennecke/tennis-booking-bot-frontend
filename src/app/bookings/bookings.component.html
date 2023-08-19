@@ -1,0 +1,10 @@
+<ng-container *ngFor="let booking of bookings">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ booking.localDateOfEvent }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-spinner color="warn" [diameter]="30" class="status-indicator"></mat-spinner>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

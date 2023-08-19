@@ -1,0 +1,187 @@
+<div class="stepper-container mat-elevation-z4">
+  <form [formGroup]="addBookingForm" (ngSubmit)="onSubmit()">
+    <mat-stepper orientation="vertical" linear="false" #stepper>
+      <mat-step
+        formGroupName="playingDate"
+        [stepControl]="addBookingForm.get('playingDate')!"
+      >
+        <ng-template matStepLabel>Playing Date</ng-template>
+
+        <mat-form-field class="first-step-item">
+          <mat-label>Playing Date</mat-label>
+          <input
+            required
+            matInput
+            placeholder="MM/DD/YYYY"
+            formControlName="playingDateCtrl"
+            [matDatepicker]="picker"
+            (ngModelChange)="onChangePlayingDate($event)"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div>
+          <button mat-raised-button matStepperNext type="button">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step
+        formGroupName="playingTimes"
+        [stepControl]="addBookingForm.get('playingTimes')!"
+      >
+        <ng-template matStepLabel>Playing Time</ng-template>
+
+        <mat-form-field class="first-step-item">
+          <mat-label>Time Preferences</mat-label>
+          <mat-select
+            required
+            formControlName="playingTimesCtrl"
+            multiple
+            (ngModelChange)="onChangePlayingTimes($event)"
+          >
+            <mat-option
+              *ngFor="let timeOption of timeOptions"
+              [value]="timeOption"
+              >{{ timeOption }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <button
+            mat-raised-button
+            matStepperPrevious
+            type="button"
+            class="back-btn"
+          >
+            Back
+          </button>
+          <button mat-raised-button matStepperNext type="button">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step
+        formGroupName="botStartTime"
+        [stepControl]="addBookingForm.get('botStartTime')!"
+      >
+        <ng-template matStepLabel>Bot Start Time</ng-template>
+
+        <div class="start-now-checkbox first-step-item">
+          <mat-checkbox (change)="onSelectStartNow($event.checked)"
+            >Start Now</mat-checkbox
+          >
+        </div>
+
+        <ng-container *ngIf="!isStartNowChecked">
+          <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input
+              matInput
+              placeholder="MM/DD/YYYY"
+              formControlName="botStartDateCtrl"
+              [matDatepicker]="botStartDatePicker"
+              (ngModelChange)="onChangeBotStartDate($event)"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="botStartDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker touchUi #botStartDatePicker></mat-datepicker>
+          </mat-form-field>
+
+          <div>
+            <mat-form-field class="bot-time-picker">
+              <mat-label>Time</mat-label>
+              <mat-select
+                formControlName="botStartTimeCtrl"
+                (ngModelChange)="onChangeBotStartTime($event)"
+              >
+                <mat-option
+                  *ngFor="let timeOption of timeOptions"
+                  [value]="timeOption"
+                  >{{ timeOption }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-container>
+
+        <div>
+          <button
+            mat-raised-button
+            matStepperPrevious
+            type="button"
+            class="back-btn"
+          >
+            Back
+          </button>
+          <button mat-raised-button matStepperNext type="button">Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step
+        formGroupName="botEndTime"
+        [stepControl]="addBookingForm.get('botEndTime')!"
+      >
+        <ng-template matStepLabel>Bot End Time</ng-template>
+
+        <mat-form-field class="first-step-item">
+          <mat-label>Date</mat-label>
+          <input
+            required
+            matInput
+            placeholder="MM/DD/YYYY"
+            formControlName="botEndDateCtrl"
+            [matDatepicker]="botEndDatePicker"
+            (ngModelChange)="onChangeBotEndDate($event)"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="botEndDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker touchUi #botEndDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <div>
+          <mat-form-field class="bot-time-picker">
+            <mat-label>Time</mat-label>
+            <mat-select
+              required
+              formControlName="botEndTimeCtrl"
+              (ngModelChange)="onChangeBotEndTime($event)"
+            >
+              <mat-option
+                *ngFor="let timeOption of timeOptions"
+                [value]="timeOption"
+                >{{ timeOption }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button
+            mat-raised-button
+            matStepperPrevious
+            type="button"
+            class="back-btn"
+          >
+            Back
+          </button>
+          <button
+            mat-raised-button
+            matStepperNext
+            type="submit"
+            [disabled]="!addBookingForm.valid"
+          >
+            Start
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</div>

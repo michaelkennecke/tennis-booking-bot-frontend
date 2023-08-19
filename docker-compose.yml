@@ -1,0 +1,38 @@
+version: "3"
+services:
+  chrome:
+    container_name: selenium-chrome
+    image: selenium/standalone-chrome:111.0
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: "2g"
+    networks:
+      - tennis-bot-network
+  tennis-bot:
+    container_name: tennis-bot
+    image: michaelkennecke/tennis-bot:latest
+    ports:
+      - "2271:2271"
+    environment:
+      - "isClaySeason=true"
+      - "isDryRun=true"
+      - "webdriver.address=http://chrome:4444/wd/hub"
+      - "eversports.username="
+      - "eversports.password="
+    networks:
+      - tennis-bot-network
+  # tennis-bot-frontend:
+  #   container_name: tennis-bot-frontend
+  #   image: tennis-bot-frontend:latest
+  #   ports:
+  #     - "2272:80"
+  #   environment:
+  #     - REACT_APP_API_ADRESS=http://tennis-bot:2271
+  #   networks:
+  #     - tennis-booking-bot-network
+  #   depends_on:
+  #     - tennis-bot
+networks:
+  tennis-bot-network:
+    driver: bridge

@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$tennis-bot-frontend-primary: mat.define-palette(mat.$gray-palette, 900);
+$tennis-bot-frontend-accent: mat.define-palette(mat.$amber-palette, A200);
+$tennis-bot-frontend-warn: mat.define-palette(mat.$red-palette);
+
+$tennis-bot-frontend-theme: mat.define-light-theme((
+  color: (
+    primary: $tennis-bot-frontend-primary,
+    accent: $tennis-bot-frontend-accent,
+    warn: $tennis-bot-frontend-warn,
+  )
+));
+
+@include mat.all-component-themes($tennis-bot-frontend-theme);
+
