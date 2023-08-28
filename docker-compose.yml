@@ -8,31 +8,40 @@ services:
       - "7900:7900"
     shm_size: "2g"
     networks:
-      - tennis-bot-network
-  tennis-bot:
-    container_name: tennis-bot
-    image: michaelkennecke/tennis-bot:latest
+      - tennis-booking-bot-network
+    profiles:
+      - dev
+      - prod
+  tennis-booking-bot:
+    container_name: tennis-booking-bot
+    image: tennis-booking-bot:latest
     ports:
       - "2271:2271"
     environment:
-      - "isClaySeason=true"
-      - "isDryRun=true"
+      - "isClaySeason=false"
+      - "isDryRun=false"
       - "webdriver.address=http://chrome:4444/wd/hub"
       - "eversports.username="
       - "eversports.password="
     networks:
-      - tennis-bot-network
-  # tennis-bot-frontend:
-  #   container_name: tennis-bot-frontend
-  #   image: tennis-bot-frontend:latest
-  #   ports:
-  #     - "2272:80"
-  #   environment:
-  #     - REACT_APP_API_ADRESS=http://tennis-bot:2271
-  #   networks:
-  #     - tennis-booking-bot-network
-  #   depends_on:
-  #     - tennis-bot
+      - tennis-booking-bot-network
+    profiles:
+      - dev
+      - prod
+  tennis-booking-bot-frontend:
+    container_name: tennis-booking-bot-frontend
+    image: tennis-booking-bot-frontend:latest
+    build: .
+    ports:
+      - "2272:80"
+    environment:
+      - REACT_APP_API_ADRESS=http://tennis-booking-bot:2271
+    networks:
+      - tennis-booking-bot-network
+    depends_on:
+      - tennis-booking-bot
+    profiles:
+      - prod
 networks:
-  tennis-bot-network:
+  tennis-booking-bot-network:
     driver: bridge

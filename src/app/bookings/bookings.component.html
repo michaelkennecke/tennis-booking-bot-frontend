@@ -1,10 +1,62 @@
-<ng-container *ngFor="let booking of bookings">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{ booking.localDateOfEvent }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-spinner color="warn" [diameter]="30" class="status-indicator"></mat-spinner>
-    </mat-card-content>
-  </mat-card>
-</ng-container>
+<div class="card-container">
+  <ng-container *ngFor="let booking of bookings">
+    <mat-expansion-panel class="card">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon
+            *ngIf="booking.bookingStatus === 'CREATED'"
+            class="status-indicator"
+            >calendar_month</mat-icon
+          >
+          <mat-icon
+            *ngIf="booking.bookingStatus === 'SUCCESSFUL'"
+            class="status-indicator success"
+            >check</mat-icon
+          >
+          <mat-icon
+            *ngIf="booking.bookingStatus === 'NOT_SUCCESSFUL'"
+            class="status-indicator failed"
+            >close</mat-icon
+          >
+          <span>{{ booking.localDateOfEvent }}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p>
+        Time Preferences:
+        <span
+          class="booking-info-text"
+          *ngFor="let pref of booking.preferences"
+        >
+          {{ pref.substring(0, 5) }}
+        </span>
+      </p>
+      <p>
+        Bot Start Time:
+        <span class="booking-info-text">{{
+          booking.localDateTimeOfBookingStart
+        }}</span>
+      </p>
+      <p>
+        Bot End Time:
+        <span class="booking-info-text">{{
+          booking.localDateTimeOfBookingEnd
+        }}</span>
+      </p>
+      <p>
+        Booking Attempts:
+        <span class="booking-info-text">{{ booking.bookingAttempts }}</span>
+      </p>
+      <button
+        class="delete-btn"
+        mat-raised-button
+        type="button"
+        size="small"
+        color="primary"
+        (click)="onDelete(booking)"
+      >
+        Delete
+      </button>
+    </mat-expansion-panel>
+  </ng-container>
+</div>

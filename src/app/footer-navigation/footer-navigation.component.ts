@@ -8,5 +8,4 @@ import { Router } from '@angular/router';
 })
 export class FooterNavigationComponent {
   constructor(public router: Router) {}
-
 }

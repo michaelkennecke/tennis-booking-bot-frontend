@@ -1,5 +1,5 @@
 export interface Booking {
-  localDateOfEvent: Date,
+  localDateOfEvent: string,
   localDateTimeOfBookingStart: string,
   localDateTimeOfBookingEnd: string,
   preferences: string[],

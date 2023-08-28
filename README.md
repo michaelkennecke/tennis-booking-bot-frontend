@@ -1,27 +1,41 @@
-# TennisBotFrontend
+# Tennis Booking Bot Frontend :tennis:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
+The web-frontend of the tennis-booking-bot, a selenium bot to find and book tennis courts.
 
-## Development server
+## How to run :rocket:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisite
 
-## Code scaffolding
+A built image of the [tennis-booking-bot](https://github.com/michaelkennecke/tennis-booking-bot)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Steps to run
 
-## Build
+1. Type in your eversports username and password in the docker-compose.yml
+2. Start the tennis-booking-bot-frontend together with the backend and selenium
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+docker-compose --profile=prod up -d
+```
 
-## Running unit tests
+### How to run for development :hammer_and_pick:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Prerequisite
 
-## Running end-to-end tests
+A built image of the [tennis-booking-bot](https://github.com/michaelkennecke/tennis-booking-bot).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Steps to run
 
-## Further help
+1. Type in your eversports username and password in the docker-compose.yml
+2. Start the tennis-booking-bot-backend and selenium
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+docker-compose --profile=dev up -d
+```
+
+3. Run the frontend
+
+```
+ng serve
+```
+
+4. Go to http://localhost:4200/

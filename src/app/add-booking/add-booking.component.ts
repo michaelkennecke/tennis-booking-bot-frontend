@@ -2,6 +2,10 @@ import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Booking } from '../models/booking';
+import { BookingService } from '../services/booking.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { first } from 'rxjs';
 
 const TIME_OPTIONS = [
   '07:00', '08:00', '09:00', '10:00', '11:00', '12:00',
@@ -16,9 +20,7 @@ const TIME_OPTIONS = [
 })
 export class AddBookingComponent {
   timeOptions = TIME_OPTIONS;
-  
   isStartNowChecked: boolean = false;
-
   playingDate: string = '';
   playingTimes: string[] = [];
   botStartDate: string = '';
@@ -43,7 +45,12 @@ export class AddBookingComponent {
     })
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private bookingService: BookingService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   onChangePlayingDate(playingDate: string): void {
     this.playingDate = this.formatMatDate(playingDate);
@@ -80,14 +87,19 @@ export class AddBookingComponent {
 
   onSubmit(): void {
     const booking: Booking = {
-      localDateOfEvent: new Date(this.playingDate),
+      localDateOfEvent: this.playingDate,
       localDateTimeOfBookingStart: !this.isStartNowChecked ? 
         this.botStartDate + 'T' + this.botStartTime 
         : '',
       localDateTimeOfBookingEnd: this.botEndDate + 'T' + this.botEndTime,
       preferences: this.playingTimes
     }
-    console.log(booking);
+    this.bookingService.addBooking(booking).pipe(first()).subscribe({
+      error: (_error) => this.snackBar.open('Something went wrong!', 'OK', {
+        duration: 5 * 1000
+      })
+    });
+    this.router.navigate(['/bookings']);
   }
 
   private formatMatDate(matDate: string): string {
